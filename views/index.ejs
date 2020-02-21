@@ -17,7 +17,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 <head>
 	<title>Videos Website Template | Home :: W3layouts</title>
-	
 	<!-- ########################linking stylesheets and dependencies############################# -->
 	<link href="stylesheets/app.css" rel="stylesheet" type="text/css" media="all" />
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -49,7 +48,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						<li><a href="/">Categories</a></li>
 						<li><a href="#videos">Videos</a></li>
 						<li><a href="/contact">Contact</a></li>
-						<li><a href="/register">Register</a></li>
+						<% if(!userData) { %>
+						<li><a href="/login">Login</a></li>
+						<% } else {%>
+						<li><a href="/logout">logout</a></li>
+						<% } %>
 					</ul>
 				</div>
 				

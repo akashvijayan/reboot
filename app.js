@@ -1,11 +1,15 @@
 var express=require("express");
-var fs=require("fs");
+var fs=require("fs"); // file system
 var mongoose=require("mongoose");
 var bodyParser=require("body-parser");
-var passport=require("passport");
-var LocalStrategy=require("passport-local");
-var User=require("./models/user");
-var Question=require("./models/question");
+
+var passport=require("passport"); // auth
+var LocalStrategy=require("passport-local"); // auth local
+
+var User=require("./models/user"); // user model
+var Question=require("./models/question"); // question model
+
+var middleware=require("./middleware"); // middleware
 
 var app=express();
 
@@ -30,6 +34,11 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+app.use((req,res,next) => { // send to every page
+	res.locals.userData=req.user;
+	next();
+});
+
 // main page
 /**
  * Description of the function
@@ -41,7 +50,26 @@ passport.deserializeUser(User.deserializeUser());
 
 
 app.get("/",(req,res) => {
-	res.render("index");
+	if(req.user) {
+		User.findById(req.user._id,(err,foundUser) => {
+			if(err) {
+				console.log(err);
+				res.send("failed");
+			}
+			else {
+				console.log(foundUser);
+				if(!foundUser.isQuizDone) {
+					res.redirect("/quiz/1/1");
+				}
+				else {
+					res.render("index");
+				}
+			}
+		});
+	}
+	else {
+		res.render("index");
+	}
 });
 
 // temp: add question 
@@ -67,8 +95,31 @@ app.post("/addquestion",(req,res) => {
 	});
 });
 
-// register
+// quiz: show
+app.get("/quiz/:level/:difficulty",(req,res) => {
+	req.params.level=Number(req.params.level);
+	req.params.difficulty=Number(req.params.difficulty);
 
+	Question.find(req.params,(err,data) => {
+		if(err) {
+			console.log(err);
+			res.send("failed");
+		}
+		else {
+			randomNumber=Math.floor(Math.random() * Math.floor(data.length));
+			console.log("random number: ",randomNumber);
+			res.render("quiz",{data:data[randomNumber]});
+		}
+	});
+});
+
+app.post("/quiz",(req,res) => {
+	// score calculation
+	// goto quiz : show for next question
+	// updation of mark at end of quiz
+});
+
+// register
 /**
  * Description of the function
  * @name renderRegister
@@ -104,7 +155,8 @@ app.get("/contact",(req,res) => {
 app.post("/register",(req,res) => {
 	var user=new User({
 		username: req.body.username,
-		name: req.body.name
+		name: req.body.name,
+		isQuizDone: false
 	});
 	User.register(user,req.body.password,(err,reguser) => {
 		if(err) {
@@ -210,5 +262,5 @@ app.get("/test/video",(req,res) => {
 
 // listen
 app.listen(3000,() => {
-	console.log("server started.at port 3000");
+	console.log("server started at port 3000.");
 });
