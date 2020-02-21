@@ -10,10 +10,13 @@ var app=express();
 
 app.set("view engine","ejs");
 
+// body-parser init
 app.use(bodyParser.urlencoded({extended: true}));
 
+// serving public repo
 app.use(express.static(__dirname+"/public"));
 
+// mongodb connection using mongoose
 mongoose.connect("mongodb://localhost:27017/reboot",{useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.set("useFindAndModify",false);
 
@@ -29,15 +32,17 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+// main page
 app.get("/",(req,res) => {
 	res.render("index");
 });
 
+// register
 app.get("/register",(req,res) => {
 	res.render("register");
 });
 
-// register
+// register (post)
 app.post("/register",(req,res) => {
 	var user=new User({
 		username: req.body.username,
@@ -55,10 +60,12 @@ app.post("/register",(req,res) => {
 	});
 });
 
+// login
 app.get("/login",(req,res) => {
 	res.render("login");
 });
 
+// login (post)
 app.post("/login",passport.authenticate("local",{
 	
 	successRedirect: "/",
@@ -68,11 +75,13 @@ app.post("/login",passport.authenticate("local",{
 	
 });
 
+// logout
 app.get("/logout",(req,res) => {
 	req.logout();
 	res.redirect("/");
 });
 
+// video streaming
 app.get("/test/video",(req,res) => {
 	const path="videos/asd.mp4";
 	const stat = fs.statSync(path);
@@ -111,6 +120,7 @@ app.get("/test/video",(req,res) => {
 		
 });
 
+// listen
 app.listen(3000,() => {
-	console.log("server started.");
+	console.log("server started.at port 3000");
 });
