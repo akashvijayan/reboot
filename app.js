@@ -53,6 +53,7 @@ app.post("/addquestion",(req,res) => {
 		}
 		else {
 			console.log(foundQue);
+			res.redirect("/addquestion");
 		}
 	});
 });
