@@ -10,13 +10,10 @@ var app=express();
 
 app.set("view engine","ejs");
 
-// body-parser init
 app.use(bodyParser.urlencoded({extended: true}));
 
-// serving public repo
 app.use(express.static(__dirname+"/public"));
 
-// mongodb connection using mongoose
 mongoose.connect("mongodb://localhost:27017/reboot",{useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.set("useFindAndModify",false);
 
@@ -65,7 +62,8 @@ app.get("/login",(req,res) => {
 	res.render("login");
 });
 
-// login (post)
+
+//login(post)
 app.post("/login",passport.authenticate("local",{
 	
 	successRedirect: "/",
