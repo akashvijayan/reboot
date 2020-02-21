@@ -5,6 +5,7 @@ var bodyParser=require("body-parser");
 var passport=require("passport");
 var LocalStrategy=require("passport-local");
 var User=require("./models/user");
+var Question=require("./models/question");
 
 var app=express();
 
@@ -14,7 +15,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(express.static(__dirname+"/public"));
 
-mongoose.connect("mongodb://localhost:27017/reboot",{useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect("mongodb+srv://admin:reboot@admin@reboot0-5b7vl.mongodb.net/reboot_db?retryWrites=true&w=majority",{useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.set("useFindAndModify",false);
 
 // passport config
@@ -34,6 +35,28 @@ app.get("/",(req,res) => {
 	res.render("index");
 });
 
+// temp: add question 
+app.get("/addquestion",(req,res) => {
+	res.render("addques");
+});
+
+app.post("/addquestion",(req,res) => {
+	req.body.answer=Number(req.body.answer);
+	req.body.difficulty=Number(req.body.difficulty);
+	req.body.level=Number(req.body.level);
+	// console.log(req.body);
+
+	Question.create(req.body,(err,foundQue) => {
+		if(err) {
+			console.log(err);
+			res.send("failed");
+		}
+		else {
+			console.log(foundQue);
+		}
+	});
+});
+
 // register
 app.get("/register",(req,res) => {
 	res.render("register");
@@ -45,7 +68,6 @@ app.post("/register",(req,res) => {
 		username: req.body.username,
 		name: req.body.name
 	});
-	console.log(req.body.password);
 	User.register(user,req.body.password,(err,reguser) => {
 		if(err) {
 			console.log(err);
