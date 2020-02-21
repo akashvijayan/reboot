@@ -79,6 +79,18 @@ app.get("/register",(req,res) => {
 	res.render("register");
 });
 
+
+/**
+ * Description of the function
+ * @name renderContact
+ * @function
+ * @param {String} /contact path
+ * @param {Function} anonymous function that renders contact page
+*/
+app.get("/contact",(req,res) => {
+	res.render("contact");
+});
+
 // register (post)
 
 /**
