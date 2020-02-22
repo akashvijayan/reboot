@@ -6,7 +6,12 @@ var userSchema = new mongoose.Schema({
 	name: String,
 	password: String,
 	mark: Number,
-	isQuizDone: Boolean
+	isQuizDone: Boolean,
+	levelmark:[{
+		level: Number,
+		difficulty: Number,
+		isAnsweredCorrect: Boolean
+	}]	
 });
 
 userSchema.plugin(passportLocalMongoose);

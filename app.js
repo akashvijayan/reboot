@@ -2,13 +2,10 @@ var express = require("express");
 var fs = require("fs"); // file system
 var mongoose = require("mongoose");
 var bodyParser = require("body-parser");
-
 var passport = require("passport"); // auth
 var LocalStrategy = require("passport-local"); // auth local
-
 var User = require("./models/user"); // user model
 var Question = require("./models/question"); // question model
-
 var middleware = require("./middleware"); // middleware
 
 var app = express();
@@ -78,6 +75,7 @@ app.get("/addquestion", (req, res) => {
 	res.render("addques");
 });
 
+// temp: add question (post)
 app.post("/addquestion", (req, res) => {
 	req.body.answer = Number(req.body.answer);
 	req.body.difficulty = Number(req.body.difficulty);
@@ -149,26 +147,28 @@ function cluster(name) {
 } 
 
 // quiz: show
-app.get("/quiz", (req, res) => {
+app.get("/quiz",middleware.isLoggedIn, (req, res) => {
 	var id = req.user._id;
-	var name;
-	User.findById(req.user._id ,(err,data) =>
-	{
-		name = data.username;
-		//console.log("hello" + name);
-	});
+	var name = req.user.username;
+	
 	if (!req.session.questionNumber) {
 		req.session.questionNumber = 1;
 		req.session.score = 0;
 		req.session.level = 1;
 		req.session.difficulty = 1;
 		req.session.ans = 0;
+		req.session.lm = [];
 	}
 	if (req.session.questionNumber % 5 == 0 && req.session.questionNumber < 15) {
 		req.session.level++;
 	}
+<<<<<<< HEAD
 	if (req.session.questionNumber == 10) {
 		User.findByIdAndUpdate(req.user._id, { mark: req.session.score, isQuizDone: true }, (err, data) => {
+=======
+	if (req.session.questionNumber == 15) {
+		User.findByIdAndUpdate(req.user._id, { mark: req.session.score, isQuizDone: true,levelmark: req.session.lm }, (err, data) => {
+>>>>>>> 388236535f9f9edfd871aa6d4da4453101a20dcf
 			if (err) {
 				console.log(err);
 				res.send("failed");
@@ -181,14 +181,14 @@ app.get("/quiz", (req, res) => {
 		});
 	}
 
-	else{
+	else {
 		Question.find({ level: req.session.level, difficulty: req.session.difficulty }, (err, data) => {
 			if (err) {
 				console.log(err);
 				res.send("failed");
 			}
 			else {
-				console.log(data);
+				// console.log(data);
 				randomNumber = Math.floor(Math.random() * Math.floor(data.length));
 				console.log("random number: ", randomNumber);
 				req.session.ans = data[randomNumber].answer;
@@ -199,25 +199,74 @@ app.get("/quiz", (req, res) => {
 		});
 	}
 
+	console.log("lm : "+req.session.lm);
+	console.log("question no: "+req.session.questionNumber);
+
 });
 
 // quiz (post)
-app.post("/quiz", (req, res) => {
+app.post("/quiz",middleware.isLoggedIn, (req, res) => {
 	var id = req.user._id;
 	answer = req.body.choice;
 	console.log(answer);
 	if (answer == req.session.ans) {
+		req.session.lm.push({
+			level: req.session.level,
+			difficulty: req.session.difficulty,
+			isAnsweredCorrect: true
+		});
 		req.session.difficulty += 1;
-		req.session.score += 2;
-
+		req.session.score += 2;		
 	}
 	else {
-		if (req.session.difficulty > 1)
+		req.session.lm.push({
+			level: req.session.level,
+			difficulty: req.session.difficulty,
+			isAnsweredCorrect: false
+		});
+		if (req.session.difficulty > 1) {
 			req.session.difficulty -= 1;
+		}
 	}
 	console.log("score" + req.session.score);
 	res.redirect("/quiz");
 });
+
+// profile
+app.get("/profile",middleware.isLoggedIn,(req,res) => {
+	plotx=[]
+	ploty=[]
+	User.findById(req.user._id,(err,foundUser) => {
+		if(err) {
+			console.log(err);
+			res.send("failed");
+		}
+		else {
+			foundUser.levelmark.forEach(element => {
+				plotx.push(element.difficulty);
+				ploty.push(element.level);
+			});
+			console.log("y: "+ploty);
+			console.log("x: "+plotx);
+			var data = {
+				x: plotx,
+				y: ploty,
+				mode: 'lines',
+				type: 'scatter'
+			};
+			res.render("profile",{data:data});
+		}
+	});
+});
+
+app.get("/profile/stats",(req,res) => {
+	res.send("done");
+});
+
+app.get("/videogallery",(req,res) => {
+	res.render("videogallery");
+});
+
 // register
 /**
  * Description of the function
