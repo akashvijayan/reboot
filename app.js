@@ -98,49 +98,52 @@ app.post("/addquestion", (req, res) => {
 
 
 
-function cluster(name) {
+function cluster(uname,name) {
 
-	// Use child_process.spawn method from 
-	// child_process module and assign it 
-	// to variable spawn 
+	
 	var spawn = require("child_process").spawn;
 	console.log("hello");
-	// Parameters passed in spawn - 
-	// 1. type_of_script 
-	// 2. list containing Path of the script 
-	// and arguments for the script 
-
-	// E.g : http://localhost:3000/name?firstname=Mike&lastname=Will 
-	// so, first name = Mike and last name = Will 
+	
 	var process = spawn('python', ["model_training.py", name]);
 
 	// Takes stdout data from script which executed 
 	// with arguments and send this data to res object 
 	process.stdout.on('data', function (data) {
-		console.log(data.toString());
+		var arr = [];
+		//console.log(data.toString());
+		arr.push(Array.from(data.toString()));
+		console.log(arr);
+		User.findByIdAndUpdate(uname, { groupMembers: arr}, (err, data) => {
+			if(!err)
+			{
+				console.log("Done");
+			}
+		});
+		
 	})
 }
 
-function clust(name) {
+function clust(uname,name) {
 
-	// Use child_process.spawn method from 
-	// child_process module and assign it 
-	// to variable spawn 
+	
 	var spawn = require("child_process").spawn;
 	console.log("hello");
-	// Parameters passed in spawn - 
-	// 1. type_of_script 
-	// 2. list containing Path of the script 
-	// and arguments for the script 
-
-	// E.g : http://localhost:3000/name?firstname=Mike&lastname=Will 
-	// so, first name = Mike and last name = Will 
+	
 	var process = spawn('python', ["test_model.py", name]);
 
 	// Takes stdout data from script which executed 
 	// with arguments and send this data to res object 
 	process.stdout.on('data', function (data) {
-		console.log(data.toString());
+		var arr = [];
+		//console.log(data.toString());
+		arr.push(Array.from(data.toString()));
+		console.log("arr"+arr);
+		User.findByIdAndUpdate(uname, { groupMembers: arr}, (err, data) => {
+			if(!err)
+			{
+				console.log("Done");
+			}
+		});
 		
 	})
 }
@@ -171,7 +174,7 @@ app.get("/quiz", middleware.isLoggedIn, (req, res) => {
 			}
 			else {
 				console.log(data);
-				cluster(name);
+				cluster(req.user._id,name);
 				res.redirect("/");
 			}
 		});
@@ -343,7 +346,7 @@ app.post("/login", passport.authenticate("local", {
 
 	var name = req.user.username;
 	console.log("Hello" + name);
-	clust(name);
+	clust(req.user._id,name);
 	if (req.isAuthenticated())
 		res.redirect("/");
 

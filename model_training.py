@@ -1,4 +1,13 @@
 # %%
+from pymongo import MongoClient
+client=MongoClient()
+client = MongoClient("mongodb+srv://admin:reboot@admin@reboot0-5b7vl.mongodb.net/reboot_db?retryWrites=true&w=majority")
+mydb = myclient["reboot_db"]
+mycollection=mydb['Users']
+#x = mycol.find_one()
+#print(x)
+
+
 from sklearn.cluster import KMeans
 import numpy as np
 import pickle
@@ -88,6 +97,10 @@ for key,value in zip(y_kmeans5,name):
     res[value] = key 
 res
 # %%
-print(arr[res[sys.argv[1]]])
+for i in arr[res[sys.argv[1]]]:
+    print(i)
+rec={ 
+groupMembers : arr
+} 
 sys.stdout.flush()
 # %%

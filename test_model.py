@@ -56,6 +56,7 @@ for key,value in zip(y_axis,name):
     res[value] = key 
 res
 # %%
-print(arr[res[sys.argv[1]]])
+for i in arr[res[sys.argv[1]]]:
+    print(i)
 sys.stdout.flush()
 #%%
