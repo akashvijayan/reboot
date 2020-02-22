@@ -15,7 +15,7 @@
 	<!-- meta character set -->
 	<meta charset="UTF-8">
 	<!-- Site Title -->
-	<title>Pemodule</title>
+	<title>Register</title>
 
 	<link href="https://fonts.googleapis.com/css?family=Poppins:100,300,500,600" rel="stylesheet">
 	<!--
@@ -84,30 +84,30 @@
 							<div class="row">
 								<br />
 								<div>
-									<div class="display-4">
-										<p><%= data.question %></p>
+									<div class="text-center">
+										<h4><%= data.question %></h4>
 									</div>
 									<!--.panel-heading-->
-									<div>
-										<h4>Your Answer</h4>
+									<div class="my-1">
+										<p><strong>Your Answer</strong></p>
 									</div>
-									<ul class="list-group">
-										<form class="form-group" action="/quiz" method="POST">
-											<% for (var i = 0; i<data.choices.length ;i++) { %>
 
-											<li class="list-group-item">
-												<div>
-													<input type="radio" id="radio" name="choice" value=<%=i %> />
-													<label for="radio">
-														<%= data.choices[i] %>
-													</label>
-												</div>
-											</li>
-											<% } %>
-											<input type="submit">
+									<form class="form-check my-3" action="/quiz" method="POST">
+										<% for (var i = 0; i<data.choices.length ;i++) { %>
 
-										</form>
-									</ul>
+
+										<div class="form-check form-check-inline mr-3">
+											<input class="form-check-input mx-0" type="radio" id="radio<%=i %>" name="choice"
+												value="<%=i %>" >
+											<label class="form-check-label"
+												for="radio<%=i%>"><span id="choice"><%= data.choices[i] %></span></label>
+										</div>
+
+										<% } %>
+										<input class="btn btn-success mx-auto mt-3 dp-display-block" type="submit">
+
+									</form>
+
 								</div>
 							</div>
 						</div>

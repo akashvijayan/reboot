@@ -2553,3 +2553,11 @@ body {
 .switch-wrap p {
   margin: 0;
 }
+
+.dp-display-block {
+  display: block;
+}
+
+#choice {
+  font-weight: 800;
+}

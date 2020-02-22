@@ -163,7 +163,7 @@ app.get("/quiz", middleware.isLoggedIn, (req, res) => {
 	if (req.session.questionNumber % 5 == 0 && req.session.questionNumber < 15) {
 		req.session.level++;
 	}
-	if (req.session.questionNumber == 2) {
+	if (req.session.questionNumber == 15) {
 		User.findByIdAndUpdate(req.user._id, { mark: req.session.score, isQuizDone: true, levelmark: req.session.lm }, (err, data) => {
 			if (err) {
 				console.log(err);
@@ -188,7 +188,6 @@ app.get("/quiz", middleware.isLoggedIn, (req, res) => {
 				randomNumber = Math.floor(Math.random() * Math.floor(data.length));
 				console.log("random number: ", randomNumber);
 				req.session.ans = data[randomNumber].answer;
-				req.session.questionNumber++;
 				res.render("quiz", { data: data[randomNumber] });
 
 			}
@@ -224,6 +223,7 @@ app.post("/quiz", middleware.isLoggedIn, (req, res) => {
 			req.session.difficulty -= 1;
 		}
 	}
+	req.session.questionNumber++;
 	console.log("score" + req.session.score);
 	res.redirect("/quiz");
 });
