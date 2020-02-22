@@ -93,8 +93,6 @@ res
 # %%
 for i in arr[res[sys.argv[1]]]:
     print(i)
-rec={ 
-groupMembers : arr
-} 
+
 sys.stdout.flush()
 # %%
