@@ -6,7 +6,6 @@ var passport = require("passport"); // auth
 var LocalStrategy = require("passport-local"); // auth local
 var User = require("./models/user"); // user model
 var Question = require("./models/question"); // question model
-var Group = require("./models/group");
 var middleware = require("./middleware"); // middleware
 
 var app = express();
