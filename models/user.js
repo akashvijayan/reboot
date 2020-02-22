@@ -11,7 +11,8 @@ var userSchema = new mongoose.Schema({
 		level: Number,
 		difficulty: Number,
 		isAnsweredCorrect: Boolean
-	}]	
+	}],
+	groupMembers: []
 });
 
 userSchema.plugin(passportLocalMongoose);
