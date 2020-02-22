@@ -111,9 +111,10 @@ function cluster(uname,name) {
 	process.stdout.on('data', function (data) {
 		var arr = [];
 		//console.log(data.toString());
-		arr.push(Array.from(data.toString()));
-		console.log(arr);
-		User.findByIdAndUpdate(uname, { groupMembers: arr}, (err, data) => {
+		 arr.push(data.toString().split("\r\n"));
+		 console.log(arr);
+		//console.log(data.toString());
+		User.findByIdAndUpdate(uname, { groupMembers: data.toString().split("\r\n")}, (err, data) => {
 			if(!err)
 			{
 				console.log("Done");
@@ -136,9 +137,10 @@ function clust(uname,name) {
 	process.stdout.on('data', function (data) {
 		var arr = [];
 		//console.log(data.toString());
-		arr.push(Array.from(data.toString()));
-		console.log("arr"+arr);
-		User.findByIdAndUpdate(uname, { groupMembers: arr}, (err, data) => {
+		 arr.push(data.toString().split("\r\n"));
+		 console.log(arr);
+		//console.log(data.toString());
+		User.findByIdAndUpdate(uname, { groupMembers: data.toString().split("\r\n")}, (err, data) => {
 			if(!err)
 			{
 				console.log("Done");
@@ -233,7 +235,16 @@ app.post("/quiz", middleware.isLoggedIn, (req, res) => {
 
 // profile
 app.get("/profile",middleware.isLoggedIn,(req,res) => {
-	res.render("profile");
+	User.findById(req.user._id,(err,foundUser) => {
+		if(err) {
+			res.send("failed");
+			console.log(err);
+		}
+		else {
+			console.log(foundUser);
+			res.render("profile",{u:foundUser});
+		}
+	});
 });
 
 app.get("/profile/stats",(req,res) => {
