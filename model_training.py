@@ -1,11 +1,5 @@
 # %%
-from pymongo import MongoClient
-client=MongoClient()
-client = MongoClient("mongodb+srv://admin:reboot@admin@reboot0-5b7vl.mongodb.net/reboot_db?retryWrites=true&w=majority")
-mydb = myclient["reboot_db"]
-mycollection=mydb['Users']
-#x = mycol.find_one()
-#print(x)
+
 
 
 from sklearn.cluster import KMeans
