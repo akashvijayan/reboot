@@ -259,10 +259,6 @@ app.get("/profile/stats",(req,res) => {
 	});
 });
 
-app.get("/profile/stats", (req, res) => {
-	res.send("done");
-});
-
 app.get("/videogallery",(req,res) => {
 	res.render("videogallery");
 });
