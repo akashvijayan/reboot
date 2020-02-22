@@ -381,7 +381,7 @@ app.get("/watch", (req, res) => {
  * @param {String} /test/video path_get
  * @param {Function} anonymous function that renders videoplayer and streams video
 */
-app.get("/test/video", (req, res) => {
+app.get("/stream/video",middleware,isLoggedIn, (req, res) => {
 	const path = "videos/asd.mp4";
 	const stat = fs.statSync(path);
 	const fileSize = stat.size;
