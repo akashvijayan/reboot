@@ -229,11 +229,15 @@ app.post("/quiz", middleware.isLoggedIn, (req, res) => {
 });
 
 // profile
-app.get("/profile", middleware.isLoggedIn, (req, res) => {
-	plotx = []
-	ploty = []
-	User.findById(req.user._id, (err, foundUser) => {
-		if (err) {
+app.get("/profile",middleware.isLoggedIn,(req,res) => {
+	res.render("profile");
+});
+
+app.get("/profile/stats",(req,res) => {
+	plotx=[]
+	ploty=[]
+	User.findById(req.user._id,(err,foundUser) => {
+		if(err) {
 			console.log(err);
 			res.send("failed");
 		}
@@ -242,15 +246,15 @@ app.get("/profile", middleware.isLoggedIn, (req, res) => {
 				plotx.push(element.difficulty);
 				ploty.push(element.level);
 			});
-			console.log("y: " + ploty);
-			console.log("x: " + plotx);
-			var data = {
+			console.log("y: "+ploty);
+			console.log("x: "+plotx);
+			var data = [{
 				x: plotx,
 				y: ploty,
 				mode: 'lines',
 				type: 'scatter'
-			};
-			res.render("profile", { data: data });
+			}];
+			res.render("stats",{data:data});
 		}
 	});
 });
@@ -259,7 +263,7 @@ app.get("/profile/stats", (req, res) => {
 	res.send("done");
 });
 
-app.get("/videogallery", (req, res) => {
+app.get("/videogallery",(req,res) => {
 	res.render("videogallery");
 });
 
