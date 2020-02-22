@@ -229,6 +229,10 @@ app.post("/quiz",middleware.isLoggedIn, (req, res) => {
 
 // profile
 app.get("/profile",middleware.isLoggedIn,(req,res) => {
+	res.render("profile");
+});
+
+app.get("/profile/stats",(req,res) => {
 	plotx=[]
 	ploty=[]
 	User.findById(req.user._id,(err,foundUser) => {
@@ -243,19 +247,15 @@ app.get("/profile",middleware.isLoggedIn,(req,res) => {
 			});
 			console.log("y: "+ploty);
 			console.log("x: "+plotx);
-			var data = {
+			var data = [{
 				x: plotx,
 				y: ploty,
 				mode: 'lines',
 				type: 'scatter'
-			};
-			res.render("profile",{data:data});
+			}];
+			res.render("stats",{data:data});
 		}
 	});
-});
-
-app.get("/profile/stats",(req,res) => {
-	res.send("done");
 });
 
 app.get("/videogallery",(req,res) => {

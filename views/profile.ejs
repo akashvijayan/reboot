@@ -1,14 +1,23 @@
 <head>
-	<!-- Load plotly.js into the DOM -->
+    <!-- Load plotly.js into the DOM -->
     <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
     <script>
-        function plot(data) {
-            Plotly.newPlot('myDiv', data);
+        function plot() {
+            var trace3 = [{
+                x: [1, 2, 3, 4],
+                y: [12, 9, 15, 12],
+                mode: 'lines',
+                type: 'scatter'
+            }];
+            Plotly.newPlot('myDiv', trace3);
         }
     </script>
 </head>
 
 <body>
-    <div id='myDiv'><!-- Plotly chart will be drawn inside this DIV --></div>
-    <button onclick="plot(<%=data%>)">plot</button>
+    <div id='myDiv'>
+        <!-- Plotly chart will be drawn inside this DIV -->
+    </div>
+    
+    <button onclick="plot()">plot</button>
 </body>
