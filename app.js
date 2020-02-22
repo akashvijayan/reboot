@@ -96,10 +96,67 @@ app.post("/addquestion", (req, res) => {
 	});
 });
 
+// function cluster(req,res) { 
+	
+// 	// Use child_process.spawn method from 
+// 	// child_process module and assign it 
+// 	// to variable spawn 
+// 	var spawn = require("child_process").spawn; 
+// 	console.log('hello');
+	
+// 	// Parameters passed in spawn - 
+// 	// 1. type_of_script 
+// 	// 2. list containing Path of the script 
+// 	// and arguments for the script 
+	
+// 	// E.g : http://localhost:3000/name?firstname=Mike&lastname=Will 
+// 	// so, first name = Mike and last name = Will 
+// 	var process = spawn('python',["model_training.py"]); 
+
+// 	// Takes stdout data from script which executed 
+// 	// with arguments and send this data to res object 
+// 	process.stdout.on('data', function(data) { 
+//         console.log('hello');
+// 		console.log(data.toString());
+	 
+// 	} );
+// 	return ; 
+// } 
+
+// app.get('/python', callName); 
+
+function cluster(name) { 
+	
+	// Use child_process.spawn method from 
+	// child_process module and assign it 
+	// to variable spawn 
+	var spawn = require("child_process").spawn; 
+	console.log("hello");
+	// Parameters passed in spawn - 
+	// 1. type_of_script 
+	// 2. list containing Path of the script 
+	// and arguments for the script 
+	
+	// E.g : http://localhost:3000/name?firstname=Mike&lastname=Will 
+	// so, first name = Mike and last name = Will 
+	var process = spawn('python',["model_training.py",name] ); 
+
+	// Takes stdout data from script which executed 
+	// with arguments and send this data to res object 
+	process.stdout.on('data', function(data) { 
+		console.log(data.toString()); 
+	} ) 
+} 
 
 // quiz: show
 app.get("/quiz", (req, res) => {
 	var id = req.user._id;
+	var name;
+	User.findById(req.user._id ,(err,data) =>
+	{
+		name = data.username;
+		//console.log("hello" + name);
+	});
 	if (!req.session.questionNumber) {
 		req.session.questionNumber = 1;
 		req.session.score = 0;
@@ -110,7 +167,7 @@ app.get("/quiz", (req, res) => {
 	if (req.session.questionNumber % 5 == 0 && req.session.questionNumber < 15) {
 		req.session.level++;
 	}
-	if (req.session.questionNumber == 15) {
+	if (req.session.questionNumber == 2) {
 		User.findByIdAndUpdate(req.user._id, { mark: req.session.score, isQuizDone: true }, (err, data) => {
 			if (err) {
 				console.log(err);
@@ -118,26 +175,29 @@ app.get("/quiz", (req, res) => {
 			}
 			else {
 				console.log(data);
+				cluster(name);
 				res.redirect("/");
 			}
 		});
 	}
 
-	Question.find({ level: req.session.level, difficulty: req.session.difficulty }, (err, data) => {
-		if (err) {
-			console.log(err);
-			res.send("failed");
-		}
-		else {
-			console.log(data);
-			randomNumber = Math.floor(Math.random() * Math.floor(data.length));
-			console.log("random number: ", randomNumber);
-			req.session.ans = data[randomNumber].answer;
-			req.session.questionNumber++;
-			res.render("quiz", { data: data[randomNumber] });
-
-		}
-	});
+	else{
+		Question.find({ level: req.session.level, difficulty: req.session.difficulty }, (err, data) => {
+			if (err) {
+				console.log(err);
+				res.send("failed");
+			}
+			else {
+				console.log(data);
+				randomNumber = Math.floor(Math.random() * Math.floor(data.length));
+				console.log("random number: ", randomNumber);
+				req.session.ans = data[randomNumber].answer;
+				req.session.questionNumber++;
+				res.render("quiz", { data: data[randomNumber] });
+	
+			}
+		});
+	}
 
 });
 
