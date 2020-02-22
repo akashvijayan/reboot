@@ -1,205 +1,218 @@
-<!-- <video id="videoPlayer" controls>
-  <source src="http://deadpool-klsds.run.goorm.io/test/video" type="video/mp4">
-</video>
-
-<a href="/register">register</a> -->
-
-
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
-<!DOCTYPE HTML>
-
-
-
+<!DOCTYPE html>
+<html lang="zxx" class="no-js">
 <head>
-	<title>Videos Website Template | Home :: W3layouts</title>
-	<!-- ########################linking stylesheets and dependencies############################# -->
-	<link href="stylesheets/app.css" rel="stylesheet" type="text/css" media="all" />
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-		integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	<!-- Mobile Specific Meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Favicon-->
+	<link rel="shortcut icon" href="img/fav.png">
+	<!-- Author Meta -->
+	<meta name="author" content="Colorlib">
+	<!-- Meta Description -->
+	<meta name="description" content="">
+	<!-- Meta Keyword -->
+	<meta name="keywords" content="">
+	<!-- meta character set -->
+	<meta charset="UTF-8">
+	<!-- Site Title -->
+	<title>LearnU</title>
 
+	<link href="https://fonts.googleapis.com/css?family=Poppins:100,300,500,600" rel="stylesheet">
+		<!--
+		CSS
+		============================================= -->
+		<link rel="stylesheet" href="stylesheets/linearicons.css">
+		<link rel="stylesheet" href="stylesheets/owl.carousel.css">
+		<link rel="stylesheet" href="stylesheets/font-awesome.min.css">
+		<link rel="stylesheet" href="stylesheets/nice-select.css">
+		<link rel="stylesheet" href="stylesheets/magnific-popup.css">
+		<link rel="stylesheet" href="stylesheets/bootstrap.css">
+		<link rel="stylesheet" href="stylesheets/main.css">
+	</head>
+	<body>
+		<div class="main-wrapper-first">
+			<div class="hero-area relative">
+				<header>
+					<div class="container">
+						<div class="header-wrap">
+							<div class="header-top d-flex justify-content-between align-items-center">
+								<div class="logo">
+									<a href="/"><img src="img/logo.png" alt=""></a>
 
-</head>
-
-<body>
-	<!---start-wrap---->
-	<!---start-header---->
-	<div class="header">
-		<div class="wrap">
-			
-			<!---start-logo---->
-			<div class="logo">
-				<a href="/"><img src="images/logo.png" title="logo" /></a>
-			</div>
-			<!---End-logo---->
-			
-			<!-- Navbar -->
-			
-			<div class="top-menu">
-				<div class="top-nav">
-					<ul>
-						<li><a href="/">Categories</a></li>
-						<li><a href="#videos">Videos</a></li>
-						<li><a href="/contact">Contact</a></li>
-						<% if(!userData) { %>
-						<li><a href="/login">Login</a></li>
-						<% } else {%>
-						<li><a href="/logout">logout</a></li>
-						<% } %>
-					</ul>
+								</div>
+								<div class="main-menubar d-flex align-items-center">
+									<nav class="hide">
+										<a href="/">Home</a>
+										<a href="/login">Login</a>
+										<a href="/videogallery">Videos</a>
+									</nav>
+									<div class="menu-bar"><span class="lnr lnr-menu"></span></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</header>
+				<div class="banner-area">
+					<div class="overlay overlay-bg"></div>
+					<div class="container">
+						<div class="row height align-items-center justify-content-center">
+							<div class="col-lg-7">
+								<div class="banner-content text-center">
+									<h4 class="text-uppercase">your learning partner</h4>
+									<h1>LearnU</h1>
+									<a href="/register" class="primary-btn d-inline-flex align-items-center"><span class="mr-10">Get Started</span><span class="lnr lnr-arrow-right"></span></a>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-				
-				
-				<div class="clear"> </div>
 			</div>
-			<div class="clear"> </div>
-			<!---End--navbar---->
 		</div>
-		<!---End-header---->
-	</div>
-	<div class="clear"> </div>
-	<!---start-content---->
-
-	<!-- Main container -->
-	<div class="container-fluid" style="padding:0%; background-image: url('images/container.jpg'); height: 500px; background-size: cover;">
-		<div class="d-flex justify-content-center h-100">
-        <div class="searchbar">
-          <input class="search_input" type="text" name="" placeholder="Search...">
-          <a href="#" class="search_icon"><i class="fa fa-search"></i></a>
-        </div>
-      </div>
-	</div>
-
-<!-- end main container -->
-	
-	
-	<!-- Video grid -->
-	
-	<!-- videogrid row 1 -->
-	<div id="videos" class="main-content">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-3 col-sm-12 content-grid">
-
-					<a href="/watch"><img src="images/gridallbum1.png" title="allbum-name" /></a>
-					<p style="padding-left: 2%; padding-right: 2%;">Lorem ipsum dolor sit amet, consectetur adipisicing
-						elit.</p>
-
-					<a class="button" href="/watch">Watch now</a>
+		<div class="main-wrapper">
+			<!-- Start Feature Area -->
+			
+			<!-- End Feature Area -->
+			<!-- Start parallux Area -->
+			<section class="parallux-area pt-100 pb-100 relative" data-parallax="scroll" data-image-src="img/parallux-bg.jpg">
+				<div class="overlay overlay-bg"></div>
+				<div class="container">
+					<div class="row justify-content-end">
+						<div class="col-lg-5 col-md-6 col-sm-12">
+							<h2>
+								Reasons To <br>
+								<span>Choose</span> Notebook
+							</h2>
+							<p>
+								Here, I focus on a range of items and features that we use in life without giving them a second thought. such as Coca Cola. Dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
+							</p>
+							<a href="#" class="primary-btn d-inline-flex align-items-center"><span class="mr-10">Get Started</span><span class="lnr lnr-arrow-right"></span></a>
+						</div>
+					</div>
 				</div>
+			</section>
+			<!-- End parallux Area -->
+			<!-- Start service Area -->
 
-				<div class="col-lg-3 col-sm-12 content-grid">
-
-					<a href="/watch"><img src="images/gridallbum1.png" title="allbum-name" /></a>
-					<p style="padding-left: 2%; padding-right: 2%;">Lorem ipsum dolor sit amet, consectetur adipisicing
-						elit.</p>
-
-					<a class="button" href="/watch">Watch now</a>
+			<section class="service-area">
+				<div class="container">
+					<div class="banner-content text-center">
+						<h1 style="font-size: 60px;" class="text-black">Contents</h1>
+						
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="single-service" style="background: url(img/s1.jpg);">
+								<div class="overlay overlay-content">
+									<h4 class="text-uppercase">Computer Science</h4>
+									<p>
+										Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+									</p>
+									<a href="/videogallery" style="width: fit-content;" class="primary-btn d-inline-flex align-items-center"><span class="mr-10">Get Started</span><span class="lnr lnr-arrow-right"></span></a>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="single-service" style="background: url(img/s2.jpg);">
+								<div class="overlay overlay-content">
+									<h4 class="text-uppercase">Electronics</h4>
+									<p>
+										Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+									</p>
+									<a href="/videogallery" style="width: fit-content;" class="primary-btn d-inline-flex align-items-center"><span class="mr-10">Get Started</span><span class="lnr lnr-arrow-right"></span></a>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="single-service" style="background: url(img/s3.jpg);">
+								<div class="overlay overlay-content">
+									<h4 class="text-uppercase">Electrical</h4>
+									<p>
+										Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+									</p>
+									<a href="/videogallery" style="width: fit-content;" class="primary-btn d-inline-flex align-items-center"><span class="mr-10">Get Started</span><span class="lnr lnr-arrow-right"></span></a>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="single-service" style="background: url(img/s4.jpg);">
+								<div class="overlay overlay-content">
+									<h4 class="text-uppercase">Mechanics</h4>
+									<p>
+										Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+									</p>
+									<a href="/videogallery" style="width: fit-content;" class="primary-btn d-inline-flex align-items-center"><span class="mr-10">Get Started</span><span class="lnr lnr-arrow-right"></span></a>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-				<div class="col-lg-3 col-sm-12 content-grid">
-
-					<a href="/watch"><img src="images/gridallbum1.png" title="allbum-name" /></a>
-					<p style="padding-left: 2%; padding-right: 2%;">Lorem ipsum dolor sit amet, consectetur adipisicing
-						elit.</p>
-
-					<a class="button" href="/watch">Watch now</a>
+			</section>
+			<!-- End service Area -->
+			<!-- Start Contact Area -->
+			<section class="contact-area pt-100 pb-100 relative">
+				<div class="overlay overlay-bg"></div>
+				<div class="container">
+					<div class="row justify-content-center text-center">
+						<div class="single-contact col-lg-6 col-md-8">
+							<h2 class="text-white">Send Us <span>Message</span></h2>
+							
+						</div>
+					</div>
+					<form id="myForm" action="mail.php" method="post" class="contact-form">
+						<div class="row justify-content-center">
+							<div class="col-lg-5">
+								<input name="fname" placeholder="Enter your name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'" class="common-input mt-20" required="" type="text">
+							</div>
+							<div class="col-lg-5">
+								<input name="email" placeholder="Enter email address" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'" class="common-input mt-20" required="" type="email">
+							</div>
+							<div class="col-lg-10">
+								<textarea class="common-textarea mt-20" name="message" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required=""></textarea>
+						</div>
+						<div class="col-lg-10 d-flex justify-content-end">
+							<button class="primary-btn white-bg d-inline-flex align-items-center mt-20"><span class="text-black mr-10">Send Message</span><span class="text-black lnr lnr-arrow-right"></span></button> <br>
+						</div>
+						<div class="alert-msg"></div>
+						</div>
+					</form>
 				</div>
-
-				<div class="col-lg-3 col-sm-12 content-grid">
-
-					<a href="/watch"><img src="images/gridallbum1.png" title="allbum-name" /></a>
-					<p style="padding-left: 2%; padding-right: 2%;">Lorem ipsum dolor sit amet, consectetur adipisicing
-						elit.</p>
-
-					<a class="button" href="/watch">Watch now</a>
+			</section>
+			<!-- End  Contact Area -->
+			
+			<!-- Start footer Area -->
+			<footer class="footer-area relative">
+				<div class="container">
+					<div class="footer-content d-flex flex-column align-items-center">
+						<div class="footer-menu">
+							<a href="index.html">Home</a>
+							<a href="generic.html">Generic</a>
+							<a href="elements.html">Elements</a>
+						</div>
+						<div class="footer-social">
+							<a href="#"><i class="fa fa-facebook"></i></a>
+							<a href="#"><i class="fa fa-twitter"></i></a>
+							<a href="#"><i class="fa fa-dribbble"></i></a>
+							<a href="#"><i class="fa fa-behance"></i></a>
+						</div>
+						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						<div class="copy-right-text">Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a></div>
+						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+					</div>
 				</div>
-
-
-
-			</div>
-
-<!-- videogrid row 2 -->
-			<div class="row">
-				<div class="col-lg-3 col-sm-12 content-grid">
-
-					<a href="/watch"><img src="images/gridallbum1.png" title="allbum-name" /></a>
-					<p style="padding-left: 2%; padding-right: 2%;">Lorem ipsum dolor sit amet, consectetur adipisicing
-						elit.</p>
-
-					<a class="button" href="/watch">Watch now</a>
-				</div>
-
-				<div class="col-lg-3 col-sm-12 content-grid">
-
-					<a href="/watch"><img src="images/gridallbum1.png" title="allbum-name" /></a>
-					<p style="padding-left: 2%; padding-right: 2%;">Lorem ipsum dolor sit amet, consectetur adipisicing
-						elit.</p>
-
-					<a class="button" href="/watch">Watch now</a>
-				</div>
-				<div class="col-lg-3 col-sm-12 content-grid">
-
-					<a href="/watch"><img src="images/gridallbum1.png" title="allbum-name" /></a>
-					<p style="padding-left: 2%; padding-right: 2%;">Lorem ipsum dolor sit amet, consectetur adipisicing
-						elit.</p>
-
-					<a class="button" href="/watch">Watch now</a>
-				</div>
-
-				<div class="col-lg-3 col-sm-12 content-grid">
-
-					<a href="/watch"><img src="images/gridallbum1.png" title="allbum-name" /></a>
-					<p style="padding-left: 2%; padding-right: 2%;">Lorem ipsum dolor sit amet, consectetur adipisicing
-						elit.</p>
-
-					<a class="button" href="/watch">Watch now</a>
-				</div>
-
-			</div>
-
+			</footer>
+			<!-- End footer Area -->
 		</div>
-	</div>
-<!-- end video grid -->
-
-	<div class="clear"> </div>
-	<!---start-pagenation----->
-	<div class="pagenation">
-		<ul>
-			<li><a href="#">1</a></li>
-			<li><a href="#">2</a></li>
-			<li><a href="#">3</a></li>
-			<li><a href="#">4</a></li>
-			<li><a href="#">5</a></li>
-			<li><a href="#">Next</a></li>
-		</ul>
-	</div>
-	<div class="clear"> </div>
-	<!---End-pagenation----->
-
-
-	<div class="clear"> </div>
-
-	</div>
-	<div class="clear"> </div>
-	<!---End-content---->
 
 
 
-	<!---start-copy-right---->
-	<div class="copy-right">
-		<p> &copy; 2013 Videos. All rights reserved | Design by <a href="http://w3layouts.com/">W3layouts</a></p>
-	</div>
-	<!---End-copy-right---->
-	<!---End-wrap---->
-	<script src="js/jquery.min.js"></script>
-	<script src="js/jquery.backtotop.js"></script>
-</body>
 
+		<script src="js/vendor/jquery-2.2.4.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+		<script src="js/vendor/bootstrap.min.js"></script>
+		<script src="js/jquery.ajaxchimp.min.js"></script>
+		<script src="js/owl.carousel.min.js"></script>
+		<script src="js/jquery.nice-select.min.js"></script>
+		<script src="js/parallax.min.js"></script>
+		<script src="js/jquery.magnific-popup.min.js"></script>
+		<script src="js/main.js"></script>
+	</body>
 </html>

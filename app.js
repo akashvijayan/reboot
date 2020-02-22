@@ -167,7 +167,7 @@ app.get("/quiz", (req, res) => {
 	if (req.session.questionNumber % 5 == 0 && req.session.questionNumber < 15) {
 		req.session.level++;
 	}
-	if (req.session.questionNumber == 2) {
+	if (req.session.questionNumber == 10) {
 		User.findByIdAndUpdate(req.user._id, { mark: req.session.score, isQuizDone: true }, (err, data) => {
 			if (err) {
 				console.log(err);
