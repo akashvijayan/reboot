@@ -2,13 +2,10 @@ var express = require("express");
 var fs = require("fs"); // file system
 var mongoose = require("mongoose");
 var bodyParser = require("body-parser");
-
 var passport = require("passport"); // auth
 var LocalStrategy = require("passport-local"); // auth local
-
 var User = require("./models/user"); // user model
 var Question = require("./models/question"); // question model
-
 var middleware = require("./middleware"); // middleware
 
 var app = express();
@@ -78,6 +75,7 @@ app.get("/addquestion", (req, res) => {
 	res.render("addques");
 });
 
+// temp: add question (post)
 app.post("/addquestion", (req, res) => {
 	req.body.answer = Number(req.body.answer);
 	req.body.difficulty = Number(req.body.difficulty);
@@ -149,7 +147,7 @@ function cluster(name) {
 } 
 
 // quiz: show
-app.get("/quiz", (req, res) => {
+app.get("/quiz",middleware.isLoggedIn, (req, res) => {
 	var id = req.user._id;
 	var name = req.user.username;
 	
@@ -196,37 +194,74 @@ app.get("/quiz", (req, res) => {
 		});
 	}
 
-	console.log("lm : "+req.session.lm)
+	console.log("lm : "+req.session.lm);
+	console.log("question no: "+req.session.questionNumber);
 
 });
 
 // quiz (post)
-app.post("/quiz", (req, res) => {
+app.post("/quiz",middleware.isLoggedIn, (req, res) => {
 	var id = req.user._id;
 	answer = req.body.choice;
 	console.log(answer);
 	if (answer == req.session.ans) {
 		req.session.lm.push({
 			level: req.session.level,
-			score: req.session.difficulty,
+			difficulty: req.session.difficulty,
 			isAnsweredCorrect: true
 		});
 		req.session.difficulty += 1;
 		req.session.score += 2;		
 	}
 	else {
+		req.session.lm.push({
+			level: req.session.level,
+			difficulty: req.session.difficulty,
+			isAnsweredCorrect: false
+		});
 		if (req.session.difficulty > 1) {
-			req.session.lm.push({
-				level: req.session.level,
-				score: req.session.difficulty,
-				isAnsweredCorrect: false
-			});
 			req.session.difficulty -= 1;
 		}
 	}
 	console.log("score" + req.session.score);
 	res.redirect("/quiz");
 });
+
+// profile
+app.get("/profile",middleware.isLoggedIn,(req,res) => {
+	plotx=[]
+	ploty=[]
+	User.findById(req.user._id,(err,foundUser) => {
+		if(err) {
+			console.log(err);
+			res.send("failed");
+		}
+		else {
+			foundUser.levelmark.forEach(element => {
+				plotx.push(element.difficulty);
+				ploty.push(element.level);
+			});
+			console.log("y: "+ploty);
+			console.log("x: "+plotx);
+			var data = {
+				x: plotx,
+				y: ploty,
+				mode: 'lines',
+				type: 'scatter'
+			};
+			res.render("profile",{data:data});
+		}
+	});
+});
+
+app.get("/profile/stats",(req,res) => {
+	res.send("done");
+});
+
+app.get("/videogallery",(req,res) => {
+	res.render("videogallery");
+});
+
 // register
 /**
  * Description of the function

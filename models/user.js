@@ -9,7 +9,7 @@ var userSchema = new mongoose.Schema({
 	isQuizDone: Boolean,
 	levelmark:[{
 		level: Number,
-		score: Number,
+		difficulty: Number,
 		isAnsweredCorrect: Boolean
 	}]	
 });
