@@ -373,7 +373,7 @@ img{max-width:100%;}
 	background: transparent url(../images/social-icons.png);
 }
 .contact-info1 {
-	font-family: Montserrat;
+	/* font-family: Montserrat; */
 	font-weight: 700;
 	color: #eee;
 }

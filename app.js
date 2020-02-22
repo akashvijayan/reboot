@@ -151,24 +151,21 @@ function cluster(name) {
 // quiz: show
 app.get("/quiz", (req, res) => {
 	var id = req.user._id;
-	var name;
-	User.findById(req.user._id ,(err,data) =>
-	{
-		name = data.username;
-		//console.log("hello" + name);
-	});
+	var name = req.user.username;
+	
 	if (!req.session.questionNumber) {
 		req.session.questionNumber = 1;
 		req.session.score = 0;
 		req.session.level = 1;
 		req.session.difficulty = 1;
 		req.session.ans = 0;
+		req.session.lm = [];
 	}
 	if (req.session.questionNumber % 5 == 0 && req.session.questionNumber < 15) {
 		req.session.level++;
 	}
-	if (req.session.questionNumber == 2) {
-		User.findByIdAndUpdate(req.user._id, { mark: req.session.score, isQuizDone: true }, (err, data) => {
+	if (req.session.questionNumber == 15) {
+		User.findByIdAndUpdate(req.user._id, { mark: req.session.score, isQuizDone: true,levelmark: req.session.lm }, (err, data) => {
 			if (err) {
 				console.log(err);
 				res.send("failed");
@@ -181,14 +178,14 @@ app.get("/quiz", (req, res) => {
 		});
 	}
 
-	else{
+	else {
 		Question.find({ level: req.session.level, difficulty: req.session.difficulty }, (err, data) => {
 			if (err) {
 				console.log(err);
 				res.send("failed");
 			}
 			else {
-				console.log(data);
+				// console.log(data);
 				randomNumber = Math.floor(Math.random() * Math.floor(data.length));
 				console.log("random number: ", randomNumber);
 				req.session.ans = data[randomNumber].answer;
@@ -199,6 +196,8 @@ app.get("/quiz", (req, res) => {
 		});
 	}
 
+	console.log("lm : "+req.session.lm)
+
 });
 
 // quiz (post)
@@ -207,13 +206,23 @@ app.post("/quiz", (req, res) => {
 	answer = req.body.choice;
 	console.log(answer);
 	if (answer == req.session.ans) {
+		req.session.lm.push({
+			level: req.session.level,
+			score: req.session.difficulty,
+			isAnsweredCorrect: true
+		});
 		req.session.difficulty += 1;
-		req.session.score += 2;
-
+		req.session.score += 2;		
 	}
 	else {
-		if (req.session.difficulty > 1)
+		if (req.session.difficulty > 1) {
+			req.session.lm.push({
+				level: req.session.level,
+				score: req.session.difficulty,
+				isAnsweredCorrect: false
+			});
 			req.session.difficulty -= 1;
+		}
 	}
 	console.log("score" + req.session.score);
 	res.redirect("/quiz");
