@@ -39,9 +39,9 @@
 				mode: 'lines',
 				type: 'scatter'
 			};
-			var line=[trace2]
+			var line = [trace2]
 			Plotly.newPlot('myDiv', line);
-			
+
 			// Plotly.plot()
 		}
 	</script>
@@ -61,8 +61,12 @@
 							<div class="main-menubar d-flex align-items-center">
 								<nav class="hide">
 									<a href="/">Home</a>
-									<a href="/login">Login</a>
 									<a href="/videogallery">Videos</a>
+									<% if(!userData) { %>
+									<a href="/login">Login</a>
+									<% } else {%>
+									<a href="/logout">Logout</a>
+									<% } %>
 								</nav>
 								<div class="menu-bar"><span class="lnr lnr-menu"></span></div>
 							</div>
