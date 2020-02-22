@@ -94,63 +94,64 @@ app.post("/addquestion", (req, res) => {
 	});
 });
 
-// function cluster(req,res) { 
-	
-// 	// Use child_process.spawn method from 
-// 	// child_process module and assign it 
-// 	// to variable spawn 
-// 	var spawn = require("child_process").spawn; 
-// 	console.log('hello');
-	
-// 	// Parameters passed in spawn - 
-// 	// 1. type_of_script 
-// 	// 2. list containing Path of the script 
-// 	// and arguments for the script 
-	
-// 	// E.g : http://localhost:3000/name?firstname=Mike&lastname=Will 
-// 	// so, first name = Mike and last name = Will 
-// 	var process = spawn('python',["model_training.py"]); 
 
-// 	// Takes stdout data from script which executed 
-// 	// with arguments and send this data to res object 
-// 	process.stdout.on('data', function(data) { 
-//         console.log('hello');
-// 		console.log(data.toString());
-	 
-// 	} );
-// 	return ; 
-// } 
 
-// app.get('/python', callName); 
 
-function cluster(name) { 
-	
+
+function cluster(name) {
+
 	// Use child_process.spawn method from 
 	// child_process module and assign it 
 	// to variable spawn 
-	var spawn = require("child_process").spawn; 
+	var spawn = require("child_process").spawn;
 	console.log("hello");
 	// Parameters passed in spawn - 
 	// 1. type_of_script 
 	// 2. list containing Path of the script 
 	// and arguments for the script 
-	
+
 	// E.g : http://localhost:3000/name?firstname=Mike&lastname=Will 
 	// so, first name = Mike and last name = Will 
-	var process = spawn('python',["model_training.py",name] ); 
+	var process = spawn('python', ["model_training.py", name]);
 
 	// Takes stdout data from script which executed 
 	// with arguments and send this data to res object 
-	process.stdout.on('data', function(data) { 
-		console.log(data.toString()); 
-	} ) 
-} 
+	process.stdout.on('data', function (data) {
+		console.log(data.toString());
+	})
+}
+
+function clust(name) {
+
+	// Use child_process.spawn method from 
+	// child_process module and assign it 
+	// to variable spawn 
+	var spawn = require("child_process").spawn;
+	console.log("hello");
+	// Parameters passed in spawn - 
+	// 1. type_of_script 
+	// 2. list containing Path of the script 
+	// and arguments for the script 
+
+	// E.g : http://localhost:3000/name?firstname=Mike&lastname=Will 
+	// so, first name = Mike and last name = Will 
+	var process = spawn('python', ["test_model.py", name]);
+
+	// Takes stdout data from script which executed 
+	// with arguments and send this data to res object 
+	process.stdout.on('data', function (data) {
+		console.log(data.toString());
+		
+	})
+}
+
+
 
 // quiz: show
-app.get("/quiz",middleware.isLoggedIn, (req, res) => {
+app.get("/quiz", middleware.isLoggedIn, (req, res) => {
 	var id = req.user._id;
 	var name = req.user.username;
-	
+
 	if (!req.session.questionNumber) {
 		req.session.questionNumber = 1;
 		req.session.score = 0;
@@ -162,8 +163,8 @@ app.get("/quiz",middleware.isLoggedIn, (req, res) => {
 	if (req.session.questionNumber % 5 == 0 && req.session.questionNumber < 15) {
 		req.session.level++;
 	}
-	if (req.session.questionNumber == 15) {
-		User.findByIdAndUpdate(req.user._id, { mark: req.session.score, isQuizDone: true,levelmark: req.session.lm }, (err, data) => {
+	if (req.session.questionNumber == 2) {
+		User.findByIdAndUpdate(req.user._id, { mark: req.session.score, isQuizDone: true, levelmark: req.session.lm }, (err, data) => {
 			if (err) {
 				console.log(err);
 				res.send("failed");
@@ -189,18 +190,18 @@ app.get("/quiz",middleware.isLoggedIn, (req, res) => {
 				req.session.ans = data[randomNumber].answer;
 				req.session.questionNumber++;
 				res.render("quiz", { data: data[randomNumber] });
-	
+
 			}
 		});
 	}
 
-	console.log("lm : "+req.session.lm);
-	console.log("question no: "+req.session.questionNumber);
+	console.log("lm : " + req.session.lm);
+	console.log("question no: " + req.session.questionNumber);
 
 });
 
 // quiz (post)
-app.post("/quiz",middleware.isLoggedIn, (req, res) => {
+app.post("/quiz", middleware.isLoggedIn, (req, res) => {
 	var id = req.user._id;
 	answer = req.body.choice;
 	console.log(answer);
@@ -211,7 +212,7 @@ app.post("/quiz",middleware.isLoggedIn, (req, res) => {
 			isAnsweredCorrect: true
 		});
 		req.session.difficulty += 1;
-		req.session.score += 2;		
+		req.session.score += 2;
 	}
 	else {
 		req.session.lm.push({
@@ -228,11 +229,11 @@ app.post("/quiz",middleware.isLoggedIn, (req, res) => {
 });
 
 // profile
-app.get("/profile",middleware.isLoggedIn,(req,res) => {
-	plotx=[]
-	ploty=[]
-	User.findById(req.user._id,(err,foundUser) => {
-		if(err) {
+app.get("/profile", middleware.isLoggedIn, (req, res) => {
+	plotx = []
+	ploty = []
+	User.findById(req.user._id, (err, foundUser) => {
+		if (err) {
 			console.log(err);
 			res.send("failed");
 		}
@@ -241,24 +242,24 @@ app.get("/profile",middleware.isLoggedIn,(req,res) => {
 				plotx.push(element.difficulty);
 				ploty.push(element.level);
 			});
-			console.log("y: "+ploty);
-			console.log("x: "+plotx);
+			console.log("y: " + ploty);
+			console.log("x: " + plotx);
 			var data = {
 				x: plotx,
 				y: ploty,
 				mode: 'lines',
 				type: 'scatter'
 			};
-			res.render("profile",{data:data});
+			res.render("profile", { data: data });
 		}
 	});
 });
 
-app.get("/profile/stats",(req,res) => {
+app.get("/profile/stats", (req, res) => {
 	res.send("done");
 });
 
-app.get("/videogallery",(req,res) => {
+app.get("/videogallery", (req, res) => {
 	res.render("videogallery");
 });
 
@@ -336,12 +337,15 @@ app.get("/login", (req, res) => {
 */
 app.post("/login", passport.authenticate("local", {
 
-	successRedirect: "/",
 	faliureRedirect: "/login"
 
 }), (req, res) => {
 
-
+	var name = req.user.username;
+	console.log("Hello" + name);
+	clust(name);
+	if (req.isAuthenticated())
+		res.redirect("/");
 
 });
 
@@ -361,7 +365,7 @@ app.get("/logout", (req, res) => {
 
 // video streaming
 
-app.get("/watch",(req,res) => {
+app.get("/watch", (req, res) => {
 	res.render("watch");
 });
 
