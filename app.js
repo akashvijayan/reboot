@@ -107,11 +107,11 @@ app.get("/quiz", (req, res) => {
 		req.session.difficulty = 1;
 		req.session.ans = 0;
 	}
-	if (req.session.questionNumber%5==0 && req.session.questionNumber < 15) {
+	if (req.session.questionNumber % 5 == 0 && req.session.questionNumber < 15) {
 		req.session.level++;
 	}
 	if (req.session.questionNumber == 15) {
-		User.findByIdAndUpdate(req.user._id, { mark: req.session.score,isQuizDone: true }, (err, data) => {
+		User.findByIdAndUpdate(req.user._id, { mark: req.session.score, isQuizDone: true }, (err, data) => {
 			if (err) {
 				console.log(err);
 				res.send("failed");
@@ -122,7 +122,6 @@ app.get("/quiz", (req, res) => {
 			}
 		});
 	}
-
 
 	Question.find({ level: req.session.level, difficulty: req.session.difficulty }, (err, data) => {
 		if (err) {
@@ -141,6 +140,8 @@ app.get("/quiz", (req, res) => {
 	});
 
 });
+
+// quiz (post)
 app.post("/quiz", (req, res) => {
 	var id = req.user._id;
 	answer = req.body.choice;
@@ -255,6 +256,11 @@ app.get("/logout", (req, res) => {
 });
 
 // video streaming
+
+app.get("/watch",(req,res) => {
+	res.render("watch");
+});
+
 /**
  * Description of the function
  * @name streamVideo
