@@ -162,13 +162,8 @@ app.get("/quiz",middleware.isLoggedIn, (req, res) => {
 	if (req.session.questionNumber % 5 == 0 && req.session.questionNumber < 15) {
 		req.session.level++;
 	}
-<<<<<<< HEAD
-	if (req.session.questionNumber == 10) {
-		User.findByIdAndUpdate(req.user._id, { mark: req.session.score, isQuizDone: true }, (err, data) => {
-=======
 	if (req.session.questionNumber == 15) {
 		User.findByIdAndUpdate(req.user._id, { mark: req.session.score, isQuizDone: true,levelmark: req.session.lm }, (err, data) => {
->>>>>>> 388236535f9f9edfd871aa6d4da4453101a20dcf
 			if (err) {
 				console.log(err);
 				res.send("failed");
