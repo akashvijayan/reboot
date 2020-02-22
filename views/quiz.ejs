@@ -1,102 +1,154 @@
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
-<!DOCTYPE HTML>
+
+
+    <!DOCTYPE html>
+<html lang="zxx" class="no-js">
 
 <head>
-    <title>Videos Website Template | Home :: W3layouts</title>
-    <link href="../stylesheets/app.css" rel="stylesheet" type="text/css" media="all" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-        integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	<!-- Mobile Specific Meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Favicon-->
+	<link rel="shortcut icon" href="img/fav.png">
+	<!-- Author Meta -->
+	<meta name="author" content="CodePixar">
+	<!-- Meta Description -->
+	<meta name="description" content="">
+	<!-- Meta Keyword -->
+	<meta name="keywords" content="">
+	<!-- meta character set -->
+	<meta charset="UTF-8">
+	<!-- Site Title -->
+	<title>Pemodule</title>
 
-
-    <!-- jquery -->
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
-    <!-- Latest compiled and minified JavaScript -->
-
+	<link href="https://fonts.googleapis.com/css?family=Poppins:100,300,500,600" rel="stylesheet">
+	<!--
+		CSS
+		============================================= -->
+	<link rel="stylesheet" href="stylesheets/linearicons.css">
+	<link rel="stylesheet" href="stylesheets/owl.carousel.css">
+	<link rel="stylesheet" href="stylesheets/font-awesome.min.css">
+	<link rel="stylesheet" href="stylesheets/nice-select.css">
+	<link rel="stylesheet" href="stylesheets/magnific-popup.css">
+	<link rel="stylesheet" href="stylesheets/bootstrap.css">
+	<link rel="stylesheet" href="stylesheets/main.css">
 </head>
 
 <body>
-    <!---start-wrap---->
-    <!---start-header---->
-    <div class="header">
-        <div class="wrap">
-            <!---start-logo---->
-            <div class="logo">
-                <a href="/"><img src="../images/logo.png" title="logo" /></a>
-            </div>
-            <!---End-logo---->
-            <!---start-top-menu-search---->
-            <div class="top-menu">
-                <div class="top-nav">
-                    <ul>
-                        <li><a href="/categories">Categories</a></li>
-                        <li><a href="#">Videos</a></li>
-                        <li><a href="/contact">Contact</a></li>
-                        <li><a href="#">Register</a></li>
-                    </ul>
+	<div class="main-wrapper-first">
+		<div class="hero-area genric-banner relative">
+			<header>
+				<div class="container">
+					<div class="header-wrap">
+						<div class="header-top d-flex justify-content-between align-items-center">
+							<div class="logo">
+								<a href="/"><img src="img/logo.png" alt=""></a>
+							</div>
+							<div class="main-menubar d-flex align-items-center">
+								<nav class="hide">
+									<a href="/">Home</a>
+									<a href="/videogallery">Videos</a>
+									<a href="/login">Login</a>
+								</nav>
+								<div class="menu-bar"><span class="lnr lnr-menu"></span></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</header>
+			<div><div class="overlay overlay-bg"></div>
+            <div class="container">
+                <div class="row height align-items-center justify-content-center">
+                    <div class="col-lg-7">
+                        <div class="banner-content text-center">
+                            <h2>Quiz</h2>
+                        </div>
+                    </div>
                 </div>
-                <div class="clear"> </div>
             </div>
-        </div>
-        <!---End-header---->
-        <div class="clear"> </div>
-        <!---start-content---->
-    </div>
+			</div>
+		</div>
+	</div>
+	<div class="main-wrapper">
 
-    <div class="container">
-        <div class="row">
-            <br />
-            <div>
-                <div>
-                    <p><%= data.question %></p>
-                </div>
-                <!--.panel-heading-->
-                <div>
-                    <h4>Your Answer</h4>
-                </div>
-                <ul class="list-group">
-                    <form action="/quiz" method="POST">
-                    <% for (var i = 0; i<data.choices.length ;i++) { %>
-                    
-                        <li class="list-group-item">
-                            <div>
-                                <input type="radio" id="radio" name="choice" value=<%=i %>   />
-                                <label for="radio">
-                                    <%= data.choices[i] %>
-                                </label>
+
+
+		<!-- Start newsletter Area -->
+		<section id = "reg"  class="newsletter-area pt-100 pb-100">
+			<div class="container">
+				<div class="row justify-content-center align-items-center">
+					<div class="text-center">
+						
+						<div class="container">
+                            <div class="row">
+                                <br />
+                                <div>
+                                    <div>
+                                        <p><%= data.question %></p>
+                                    </div>
+                                    <!--.panel-heading-->
+                                    <div>
+                                        <h4>Your Answer</h4>
+                                    </div>
+                                    <ul class="list-group">
+                                        <form class="form-group" action="/quiz" method="POST">
+                                        <% for (var i = 0; i<data.choices.length ;i++) { %>
+                                        
+                                            <li class="list-group-item">
+                                                <div>
+                                                    <input type="radio" id="radio" name="choice" value=<%=i %>   />
+                                                    <label for="radio">
+                                                        <%= data.choices[i] %>
+                                                    </label>
+                                                </div>
+                                            </li>
+                                            <% } %>
+                                            <input type="submit">
+                                            
+                                        </form>
+                                    </ul>
+                                </div>
                             </div>
-                        </li>
-                        <% } %>
-                        <input type="submit">
-                        <button>Next</button>
-                    </form>
-                </ul>
-            </div>
-        </div>
-        
-        </form>
-    </div>
-
-    <div class="clear"> </div>
-    <!---End-top-menu-search---->
-
-    <div class="clear"> </div>
-    <!---End-content---->
-    <!---start-copy-right---->
-    <div class="copy-right">
-        <p> &copy; 2013 Videos. All rights reserved | Design by <a href="http://w3layouts.com/">W3layouts</a></p>
-    </div>
-    <!---End-copy-right---->
-    <!---End-wrap---->
-
-    <script type="text/javascript" src="../js/nextQ.js"></script>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- Start newsletter Area -->
+		<!-- Start footer Area -->
+		<footer class="footer-area relative">
+			<div class="container">
+				<div class="footer-content d-flex flex-column align-items-center">
+					<div class="footer-menu">
+						<a href="index.html">Home</a>
+						<a href="generic.html">Generic</a>
+						<a href="elements.html">Elements</a>
+					</div>
+					<div class="footer-social">
+						<a href="#"><i class="fa fa-facebook"></i></a>
+						<a href="#"><i class="fa fa-twitter"></i></a>
+						<a href="#"><i class="fa fa-dribbble"></i></a>
+						<a href="#"><i class="fa fa-behance"></i></a>
+					</div>
+					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+					<div class="copy-right-text">Copyright &copy;
+						<script>document.write(new Date().getFullYear());</script> All rights reserved | This template
+						is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com"
+							target="_blank">Colorlib</a></div>
+					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+				</div>
+			</div>
+		</footer>
+		<!-- End footer Area -->
+	</div>
+	<script src="js/vendor/jquery-2.2.4.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+		integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+		crossorigin="anonymous"></script>
+	<script src="js/vendor/bootstrap.min.js"></script>
+	<script src="js/jquery.ajaxchimp.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/jquery.nice-select.min.js"></script>
+	<script src="js/parallax.min.js"></script>
+	<script src="js/jquery.magnific-popup.min.js"></script>
+	<script src="js/main.js"></script>
 </body>
 
-</html>
+</htstylesheets
