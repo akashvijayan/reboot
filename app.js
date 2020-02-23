@@ -297,8 +297,8 @@ app.get("/register", (req, res) => {
  * @param {String} /contact path
  * @param {Function} anonymous function that renders contact page
 */
-app.get("/contact", (req, res) => {
-	res.render("contact");
+app.get("/tools", (req, res) => {
+	res.render("tools");
 });
 
 // register (post)
